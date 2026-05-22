@@ -811,7 +811,7 @@ def main():
         f.write(daily_html)
     print("✅ daily-news.html 已生成")
     
-    detail_html = generate_news_detail(news_list)
+    detail_html = generate_news_detail()
     with open('news-detail.html', 'w', encoding='utf-8') as f:
         f.write(detail_html)
     print("✅ news-detail.html 已生成")
