@@ -787,7 +787,7 @@ def generate_news_detail():
                 const n = newsData[id];
                 return `
                     <div class="related-item" onclick="window.location.href='news-detail.html?news=${{id}}'">
-                        f"{news.title}"
+                        ${n.title}
                     </div>
                 `;
             }}).join('');
@@ -800,7 +800,7 @@ def generate_news_detail():
 </body>
 </html>"""
     
-    return daily_html, news_list
+    return html_content
 
 def main():
     """主函数"""
@@ -815,7 +815,6 @@ def main():
     with open('news-detail.html', 'w', encoding='utf-8') as f:
         f.write(detail_html)
     print("✅ news-detail.html 已生成")
-    
     
     print("🎉 新闻页面生成完成！")
 
