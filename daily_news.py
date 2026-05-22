@@ -806,7 +806,7 @@ def main():
     """主函数"""
     print("🔄 正在生成每日新闻页面...")
     
-   daily_html, news_list = generate_daily_news()
+   daily_html = generate_daily_news()
     with open('daily-news.html', 'w', encoding='utf-8') as f:
         f.write(daily_html)
     print("✅ daily-news.html 已生成")
