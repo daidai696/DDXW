@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日新闻速递</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .header .date {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+        }
+        .header .update-time {
+            font-size: 13px;
+            color: #95a5a6;
+        }
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            scrollbar-width: none;
+        }
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+        .tab {
+            flex-shrink: 0;
+            padding: 12px 24px;
+            background: #f5f7fa;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #5a6672;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .tab:hover {
+            background: #e8ecef;
+            transform: translateY(-2px);
+        }
+        .tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .tab-count {
+            background: rgba(255,255,255,0.25);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        .tab.active .tab-count {
+            background: rgba(255,255,255,0.3);
+        }
+        .content-area {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            min-height: 400px;
+        }
+        .category-panel {
+            display: none;
+        }
+        .category-panel.active {
+            display: block;
+        }
+        .category-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f0f3f5;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .news-item {
+            padding: 20px;
+            background: #fafbfc;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .news-item:hover {
+            background: #f0f4f8;
+            transform: translateX(5px);
+            border-color: #667eea;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.15);
+        }
+        .news-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .news-title::before {
+            content: '📌';
+            font-size: 14px;
+        }
+        .news-source {
+            font-size: 13px;
+            color: #95a5a6;
+            background: #e8ecef;
+            padding: 4px 12px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .news-details {
+            margin-top: 15px;
+        }
+        .detail-item {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #5a6672;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #667eea;
+            margin-right: 8px;
+        }
+        .detail-content {
+            line-height: 1.6;
+        }
+        .summary-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 25px;
+            color: white;
+        }
+        .summary-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .summary-title::before {
+            content: '💡';
+            font-size: 22px;
+        }
+        .summary-content {
+            font-size: 15px;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+        .summary-content p {
+            margin-bottom: 12px;
+            text-indent: 2em;
+        }
+        .summary-content p:last-child {
+            margin-bottom: 0;
+        }
+        .footer {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .footer p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        .footer .tip {
+            margin-top: 8px;
+            color: #667eea;
+            font-weight: 500;
+        }
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 22px;
+            }
+            .content-area {
+                padding: 20px;
+            }
+            .tab {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+            .news-title {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📰 每日新闻速递</h1>
+            <div class="date">2026年05月21日</div>
+            <div class="update-time">⏱️ 最后更新: 2026-05-21 10:00</div>
+        </div>
+
+        <div class="category-tabs">
+            <button class="tab active" data-category="politics">
+                🇨🇳 国际政治
+                <span class="tab-count">3</span>
+            </button>
+            <button class="tab" data-category="economy">
+                💰 财经经济
+                <span class="tab-count">4</span>
+            </button>
+            <button class="tab" data-category="tech">
+                🤖 AI科技
+                <span class="tab-count">4</span>
+            </button>
+            <button class="tab" data-category="military">
+                ⚔️ 军事安全
+                <span class="tab-count">2</span>
+            </button>
+            <button class="tab" data-category="society">
+                🌍 人文社会
+                <span class="tab-count">2</span>
+            </button>
+        </div>
+
+        <div class="content-area">
+            <div id="politics" class="category-panel active">
+                <h2 class="category-title">🇨🇳 国际政治</h2>
+                <div class="news-list">
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=1'">
+                        <div class="news-title">中俄元首会谈：续签睦邻友好合作条约</div>
+                        <span class="news-source">人民日报</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心内容：</span><span class="detail-content">国家主席习近平与俄罗斯总统普京在北京举行会谈，一致同意《中俄睦邻友好合作条约》继续延期</span></div>
+                            <div class="detail-item"><span class="detail-label">重要成果：</span><span class="detail-content">双方签署发表联合声明，见证签署经贸、教育、科技等领域20项合作文件</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=2'">
+                        <div class="news-title">美伊谈判进入"最后阶段"</div>
+                        <span class="news-source">环球时报</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心进展：</span><span class="detail-content">美国总统特朗普表示，与伊朗的谈判已进入"最后阶段"</span></div>
+                            <div class="detail-item"><span class="detail-label">市场反应：</span><span class="detail-content">国际油价大跌超5.5%，WTI原油收报98.26美元/桶</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=3'">
+                        <div class="news-title">欧盟推出新数字战略，加速AI监管</div>
+                        <span class="news-source">澎湃新闻</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心内容：</span><span class="detail-content">欧盟委员会发布《数字未来法案》，提出更严格的AI风险分类和合规要求</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="economy" class="category-panel">
+                <h2 class="category-title">💰 财经经济</h2>
+                <div class="news-list">
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=4'">
+                        <div class="news-title">美联储会议纪要"放鹰"</div>
+                        <span class="news-source">金融时报</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心内容：</span><span class="detail-content">多数决策者认为若通胀持续高于2%需政策收紧，多位官员支持未来加息</span></div>
+                            <div class="detail-item"><span class="detail-label">市场反应：</span><span class="detail-content">市场押注美联储年底前加息25bp概率升至60%</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=5'">
+                        <div class="news-title">英伟达Q1财报超预期</div>
+                        <span class="news-source">IT之家</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心数据：</span><span class="detail-content">营收同比大增85%至816亿美元，净利润达583亿美元</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=6'">
+                        <div class="news-title">SpaceX提交IPO申请</div>
+                        <span class="news-source">华尔街见闻</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心计划：</span><span class="detail-content">目标估值指向1.8万亿美元，计划2028年部署轨道算力卫星</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=7'">
+                        <div class="news-title">中国财政数据亮眼</div>
+                        <span class="news-source">证券时报</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心数据：</span><span class="detail-content">1-4月全国税收收入6.81万亿元，同比增长3.9%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tech" class="category-panel">
+                <h2 class="category-title">🤖 AI科技</h2>
+                <div class="news-list">
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=8'">
+                        <div class="news-title">OpenAI发布GPT-4o升级版，多模态能力再突破</div>
+                        <span class="news-source">科技日报</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心内容：</span><span class="detail-content">推出GPT-4o Ultra模型，支持128K上下文窗口，图像理解能力提升40%</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=9'">
+                        <div class="news-title">阿里云发布"真武M890"AI芯片</div>
+                        <span class="news-source">36氪</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心数据：</span><span class="detail-content">采用5nm工艺，算力达400TOPS，能效比提升60%</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=10'">
+                        <div class="news-title">中国移动上线"词元套餐"</div>
+                        <span class="news-source">通信世界</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心内容：</span><span class="detail-content">推出统一算力量纲，将不同模型词元消耗统一封装为标准积分</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=11'">
+                        <div class="news-title">白宫拟发布AI行政令</div>
+                        <span class="news-source">彭博社</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心内容：</span><span class="detail-content">授权情报机构和政府机构在先进模型发布前进行审查</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="military" class="category-panel">
+                <h2 class="category-title">⚔️ 军事安全</h2>
+                <div class="news-list">
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=12'">
+                        <div class="news-title">美军加速AI军事化进程</div>
+                        <span class="news-source">解放军报</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心内容：</span><span class="detail-content">五角大楼与SpaceX、OpenAI、谷歌等7家AI巨头达成540亿美元协议</span></div>
+                            <div class="detail-item"><span class="detail-label">重要动作：</span><span class="detail-content">将顶尖AI技术接入军事机密网络，直接参与作战决策</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=13'">
+                        <div class="news-title">我国新型装备亮相，国防科技再获突破</div>
+                        <span class="news-source">央视新闻</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">重要成果：</span><span class="detail-content">多款新型装备在国防科技展上亮相，展现我国国防自主创新能力</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="society" class="category-panel">
+                <h2 class="category-title">🌍 人文社会</h2>
+                <div class="news-list">
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=14'">
+                        <div class="news-title">中欧联合"微笑"卫星成功发射</div>
+                        <span class="news-source">光明日报</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心内容：</span><span class="detail-content">探测太阳风与地球磁层相互作用，深化太空科学合作</span></div>
+                        </div>
+                    </div>
+                    <div class="news-item" onclick="window.location.href='news-detail.html?news=15'">
+                        <div class="news-title">小米发布新车型YU7 GT</div>
+                        <span class="news-source">汽车之家</span>
+                        <div class="news-details">
+                            <div class="detail-item"><span class="detail-label">核心内容：</span><span class="detail-content">雷军表示该车定位为"时代精英"打造，定价"会有点小贵"</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-section">
+            <div class="summary-title">今日新闻总结与启示</div>
+            <div class="summary-content">
+                <p><strong>宏观层面：</strong>今日新闻展现了全球政治经济格局的深度调整。中俄战略合作的深化标志着多极化趋势的进一步巩固，而美伊谈判的进展则为中东局势带来缓和曙光。美联储的鹰派信号表明全球货币政策仍在寻找新的平衡点，这对新兴市场国家的经济政策提出了更高要求。</p>
+                <p><strong>微观层面：</strong>科技领域的突破尤为引人关注。AI技术正在从实验室快速走向产业化应用，英伟达的财报数据印证了AI芯片市场的强劲需求。同时，各国政府对AI监管的重视程度明显提升，这预示着未来AI发展将在创新与规范之间寻求平衡。</p>
+                <p><strong>发展启示：</strong>在科技竞争白热化的今天，自主可控成为各国发展的关键。我国在AI芯片领域的突破值得肯定，但也要看到与国际领先水平的差距。军事领域的AI应用警示我们，科技伦理和安全问题亟待重视。</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🌐 每日早10点自动更新新闻 | 祝您阅读愉快</p>
+            <p class="tip">📱 支持手机、平板、电脑多端访问</p>
+        </div>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const panels = document.querySelectorAll('.category-panel');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const category = tab.getAttribute('data-category');
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                panels.forEach(p => p.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(category).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
