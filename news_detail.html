@@ -13,15 +13,11 @@
             padding: 20px;
             line-height: 1.8;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .header {
+        .container { max-width: 800px; margin: 0 auto; }
+        .card {
             background: white;
             border-radius: 20px;
             padding: 30px;
-            margin-bottom: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
         }
         .back-link {
@@ -33,446 +29,184 @@
             font-weight: 500;
             margin-bottom: 20px;
             transition: color 0.3s ease;
+            font-size: 15px;
         }
-        .back-link:hover {
-            color: #764ba2;
-        }
-        .news-title {
-            font-size: 28px;
+        .back-link:hover { color: #764ba2; }
+        .title {
+            font-size: 26px;
             font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             line-height: 1.4;
         }
-        .news-meta {
+        .meta {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            color: #7f8c8d;
-            font-size: 14px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
-        .news-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .category-tag {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 4px 12px;
+        .meta span {
+            background: #f5f7fa;
+            padding: 6px 14px;
             border-radius: 15px;
-            font-size: 12px;
-        }
-        .content-section {
-            background: white;
-            border-radius: 16px;
-            padding: 35px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        .section-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #f0f3f5;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 20px;
-            background: linear-gradient(180deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-        .detail-item {
-            margin-bottom: 20px;
-            padding: 20px;
-            background: #fafbfc;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        .detail-item:hover {
-            background: #f0f4f8;
-            transform: translateX(5px);
-        }
-        .detail-label {
             font-size: 14px;
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 8px;
-            display: block;
-        }
-        .detail-content {
-            font-size: 16px;
             color: #5a6672;
-            line-height: 1.8;
         }
-        .summary-box {
+        .content {
+            color: #5a6672;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+        .content a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .content a:hover { text-decoration: underline; }
+        .impact {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 15px;
+            padding: 22px;
             color: white;
-            margin-top: 25px;
+            margin-top: 20px;
         }
-        .summary-box h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
+        .impact h4 {
+            font-size: 17px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .summary-box p {
+        .impact p {
             opacity: 0.95;
-            line-height: 1.9;
+            line-height: 1.8;
         }
-        .related-news {
-            background: white;
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        .related {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
         }
-        .related-list {
-            list-style: none;
-        }
-        .related-item {
-            padding: 15px 0;
-            border-bottom: 1px solid #f5f7fa;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .related-item:last-child {
-            border-bottom: none;
-        }
-        .related-item:hover {
-            background: #fafbfc;
-            padding-left: 10px;
-            border-radius: 8px;
-        }
-        .related-item span.title {
-            flex: 1;
+        .related h4 {
             color: #2c3e50;
-            font-size: 15px;
-            transition: color 0.3s ease;
+            margin-bottom: 18px;
+            font-size: 17px;
         }
-        .related-item:hover span.title {
-            color: #667eea;
+        .rel-item {
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #2c3e50;
         }
-        .related-icon {
-            font-size: 16px;
+        .rel-item:last-child { border-bottom: none; }
+        .rel-item:hover {
             color: #667eea;
+            padding-left: 8px;
         }
         .footer {
             background: rgba(255,255,255,0.95);
             border-radius: 16px;
             padding: 20px;
             text-align: center;
-            margin-top: 30px;
+            margin-top: 25px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
-        .footer p {
-            color: #7f8c8d;
-            font-size: 14px;
-        }
+        .footer p { color: #7f8c8d; font-size: 14px; }
         @media (max-width: 600px) {
-            .news-title {
-                font-size: 22px;
-            }
-            .content-section {
-                padding: 20px;
-            }
-            .news-meta {
-                flex-direction: column;
-                gap: 8px;
-            }
+            .title { font-size: 20px; }
+            .card { padding: 20px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <div class="card">
             <a href="daily-news.html" class="back-link">
                 <span>←</span>
                 <span>返回新闻列表</span>
             </a>
-            <h1 class="news-title" id="news-title">新闻详情</h1>
-            <div class="news-meta">
-                <span><span class="category-tag" id="category-tag">新闻分类</span></span>
-                <span id="news-date">📅 2026年05月21日</span>
-                <span id="news-source">📰 来源</span>
+            <div class="title" id="title">正在加载...</div>
+            <div class="meta" id="meta"></div>
+            <div class="content" id="content"></div>
+            <div class="impact">
+                <h4>💡 新闻启示</h4>
+                <p id="impact"></p>
+            </div>
+            <div class="related">
+                <h4>📌 相关新闻</h4>
+                <div id="related"></div>
             </div>
         </div>
-
-        <div class="content-section">
-            <h2 class="section-title">新闻详情</h2>
-            <div id="news-details"></div>
-            
-            <div class="summary-box">
-                <h3>💡 新闻启示</h3>
-                <p id="news-summary">点击新闻列表中的新闻查看详细内容和启示。</p>
-            </div>
-        </div>
-
-        <div class="related-news">
-            <h2 class="section-title">相关新闻</h2>
-            <ul class="related-list" id="related-news"></ul>
-        </div>
-
         <div class="footer">
             <p>🌐 每日早10点自动更新新闻 | 祝您阅读愉快</p>
         </div>
     </div>
-
     <script>
-        const newsData = {
-            1: {
-                title: '中俄元首会谈：续签睦邻友好合作条约',
-                category: '国际政治',
-                source: '人民日报',
-                details: [
-                    { label: '核心内容', content: '国家主席习近平与俄罗斯总统普京在北京举行会谈，一致同意《中俄睦邻友好合作条约》继续延期。这是中俄战略协作伙伴关系持续深化的重要标志，彰显了两国在国际风云变幻中相互支持、携手前行的坚定决心。' },
-                    { label: '重要成果', content: '双方签署发表联合声明，见证签署经贸、教育、科技等领域20项合作文件，推动务实合作提质升级。在能源领域，双方同意深化油气、核能合作；在科技领域，加强人工智能、航天等前沿技术协同创新；在人文领域，扩大教育、文化、旅游等交流合作。' },
-                    { label: '核心计划', content: '以新质生产力打造增长新引擎，深化能源、航天、数字经济等领域战略合作。双方将共同推动"一带一路"与欧亚经济联盟对接，促进区域经济一体化发展，为世界经济复苏注入新动力。' },
-                    { label: '背景分析', content: '当前国际形势复杂多变，单边主义、保护主义抬头，全球性挑战日益增多。中俄作为联合国安理会常任理事国，肩负着维护世界和平与发展的重要责任。此次会谈为中俄关系发展注入新的动力，也为世界多极化进程作出重要贡献。' }
-                ],
-                summary: '中俄战略合作的深化不仅有利于两国共同发展，也为世界和平稳定提供了重要支撑。在当前国际格局深刻调整的背景下，坚持多边主义、推动互利共赢合作，已成为各国应对挑战的必然选择。',
-                related: [2, 3, 12, 5]
-            },
-            2: {
-                title: '美伊谈判进入"最后阶段"',
-                category: '国际政治',
-                source: '环球时报',
-                details: [
-                    { label: '核心进展', content: '美国总统特朗普表示，与伊朗的谈判已进入"最后阶段"，可能在未来数日内达成协议。双方在核问题、地区安全等关键议题上取得重要进展。' },
-                    { label: '市场反应', content: '国际油价大跌超5.5%，WTI原油收报98.26美元/桶，避险情绪明显降温。全球股市普遍上涨，风险资产获得提振。' },
-                    { label: '紧张态势', content: '伊朗警告若再遭袭击，战火将溢出中东；阿联酋新输油管道已完工约50%以降低霍尔木兹海峡运输风险，中东地缘政治格局正在发生深刻变化。' },
-                    { label: '前景展望', content: '若协议达成，将为中东地区带来和平稳定的新机遇，也将对全球能源市场和地缘政治产生深远影响。' }
-                ],
-                summary: '美伊关系的缓和是全球地缘政治格局调整的重要信号。在经历多年紧张对峙后，双方通过外交途径解决分歧，为国际社会树立了通过对话解决争端的典范。',
-                related: [1, 4, 5, 12]
-            },
-            3: {
-                title: '欧盟推出新数字战略，加速AI监管',
-                category: '国际政治',
-                source: '澎湃新闻',
-                details: [
-                    { label: '核心内容', content: '欧盟委员会发布《数字未来法案》，提出更严格的AI风险分类和合规要求，旨在建立全球最严格的数字监管框架。' },
-                    { label: '重要动作', content: '计划在2027年前建立统一的数字市场监管框架，加强对大型科技公司的数据治理要求，推动数字经济健康发展。' },
-                    { label: '监管重点', content: '法案重点关注高风险AI应用，包括生物识别、教育评估、关键基础设施等领域，要求企业进行严格的风险评估和合规审查。' },
-                    { label: '国际影响', content: '欧盟的数字监管举措将对全球科技行业产生示范效应，各国可能效仿制定类似法规，推动全球数字治理标准的形成。' }
-                ],
-                summary: '欧盟在数字监管领域再次走在世界前列。面对AI技术的快速发展，建立合理的监管框架既能保护用户权益，又能促进科技创新，是各国需要共同探索的课题。',
-                related: [8, 11, 9, 5]
-            },
-            4: {
-                title: '美联储会议纪要"放鹰"',
-                category: '财经经济',
-                source: '金融时报',
-                details: [
-                    { label: '核心内容', content: '多数决策者认为若通胀持续高于2%需政策收紧，多位官员支持未来加息，措辞远超市场预期，显示美联储对通胀的担忧依然强烈。' },
-                    { label: '市场反应', content: '市场押注美联储年底前加息25bp概率升至60%，2026年降息预期几近归零。美元指数走强，全球资本市场承压。' },
-                    { label: '政策展望', content: '美联储可能在未来几个月内继续维持高利率政策，直到通胀明确回落至2%目标。这将对全球流动性产生持续影响。' },
-                    { label: '经济影响', content: '高利率环境将继续压制投资和消费，可能导致经济增长放缓，但有助于遏制通胀压力，维持经济长期稳定。' }
-                ],
-                summary: '美联储的鹰派立场反映了当前全球货币政策的复杂性。在通胀与增长之间寻求平衡是各国央行面临的共同挑战，投资者需要密切关注政策动向。',
-                related: [5, 6, 7, 2]
-            },
-            5: {
-                title: '英伟达Q1财报超预期',
-                category: '财经经济',
-                source: 'IT之家',
-                details: [
-                    { label: '核心数据', content: '营收同比大增85%至816亿美元，净利润达583亿美元，毛利率创历史新高，远超市场预期。数据中心业务成为主要增长引擎。' },
-                    { label: '重要动作', content: '宣布新增800亿美元回购计划，黄仁勋称Vera Rubin全周期供应受限，显示公司对未来发展充满信心。' },
-                    { label: '业务亮点', content: 'AI芯片需求持续旺盛，数据中心收入同比增长超过100%，游戏业务也实现稳健增长。' },
-                    { label: '行业影响', content: '英伟达的强劲表现印证了AI产业的蓬勃发展，也为整个半导体行业注入信心。' }
-                ],
-                summary: '英伟达的财报再次证明AI芯片市场的巨大潜力。随着AI技术的广泛应用，半导体产业将迎来新的发展机遇，投资者可关注相关产业链机会。',
-                related: [8, 9, 4, 6]
-            },
-            6: {
-                title: 'SpaceX提交IPO申请',
-                category: '财经经济',
-                source: '华尔街见闻',
-                details: [
-                    { label: '核心计划', content: '目标估值指向1.8万亿美元，计划2028年部署轨道算力卫星，打造太空互联网基础设施。' },
-                    { label: '重要动作', content: '马斯克奖励与火星百万人口挂钩，IPO募集资金将用于星舰研发和星链扩展，推动太空探索商业化进程。' },
-                    { label: '技术进展', content: '星舰试飞取得重要突破，可重复使用技术日趋成熟，为大规模太空探索奠定基础。' },
-                    { label: '市场前景', content: 'SpaceX的上市将成为科技史上的里程碑事件，有望吸引大量资本关注太空产业。' }
-                ],
-                summary: 'SpaceX的IPO标志着太空探索进入商业化新阶段。随着技术的进步和成本的降低，太空经济有望成为下一个重要增长领域。',
-                related: [5, 14, 8, 7]
-            },
-            7: {
-                title: '中国财政数据亮眼',
-                category: '财经经济',
-                source: '证券时报',
-                details: [
-                    { label: '核心数据', content: '1-4月全国税收收入6.81万亿元，同比增长3.9%；证券交易印花税935亿元，同比增长74.8%，显示经济活力持续增强。' },
-                    { label: '重要成果', content: '支出规模为年初预算的31.6%，进度为近5年同期最快，财政政策效能持续释放，有力支持实体经济发展。' },
-                    { label: '政策导向', content: '财政政策更加注重精准发力，重点支持科技创新、绿色发展、民生保障等领域，推动经济高质量发展。' },
-                    { label: '经济展望', content: '随着各项政策效果的显现，中国经济有望保持平稳健康发展，为全球经济复苏作出贡献。' }
-                ],
-                summary: '中国财政数据的良好表现反映了经济的稳健复苏态势。积极的财政政策为经济发展提供了有力支撑，展现了中国经济的强大韧性。',
-                related: [4, 5, 9, 15]
-            },
-            8: {
-                title: 'OpenAI发布GPT-4o升级版，多模态能力再突破',
-                category: 'AI科技',
-                source: '科技日报',
-                details: [
-                    { label: '核心内容', content: '推出GPT-4o Ultra模型，支持128K上下文窗口，图像理解能力提升40%，实现更强大的多模态交互能力。' },
-                    { label: '重要成果', content: '实现视频理解和实时交互功能，API调用成本降低30%，推动AI应用场景进一步扩展。' },
-                    { label: '技术突破', content: '在视觉理解、逻辑推理、创意生成等方面取得重要进展，为AI应用开辟新的可能性。' },
-                    { label: '行业影响', content: 'GPT-4o Ultra的发布将进一步巩固OpenAI在AI领域的领先地位，也将推动整个行业加速创新。' }
-                ],
-                summary: 'OpenAI的持续创新展示了AI技术的快速发展。随着模型能力的不断提升，AI将在更多领域发挥重要作用，深刻改变人们的生产生活方式。',
-                related: [9, 11, 5, 3]
-            },
-            9: {
-                title: '阿里云发布"真武M890"AI芯片',
-                category: 'AI科技',
-                source: '36氪',
-                details: [
-                    { label: '核心数据', content: '采用5nm工艺，算力达400TOPS，能效比提升60%，达到国际先进水平。' },
-                    { label: '重要成果', content: '推出新一代AI芯片及千问旗舰模型Qwen3.7-Max，推动AI基础设施自主可控，保障国家信息安全。' },
-                    { label: '技术特点', content: '针对大模型训练和推理进行深度优化，支持多种主流框架，具有良好的兼容性和扩展性。' },
-                    { label: '应用前景', content: '将广泛应用于云计算、智能终端、工业互联网等领域，为数字经济发展提供强大算力支撑。' }
-                ],
-                summary: '阿里云在AI芯片领域的突破是中国科技自主创新的重要成果。实现核心技术自主可控是保障国家数字安全的关键，也是推动产业升级的基础。',
-                related: [8, 10, 5, 7]
-            },
-            10: {
-                title: '中国移动上线"词元套餐"',
-                category: 'AI科技',
-                source: '通信世界',
-                details: [
-                    { label: '核心内容', content: '推出统一算力量纲，将不同模型词元消耗统一封装为标准积分，解决用户使用AI服务时的计费困惑。' },
-                    { label: '重要动作', content: '最低5元月包，解决多模型量纲不统一问题，降低AI应用门槛，推动AI技术普及应用。' },
-                    { label: '服务特点', content: '支持多种主流AI模型，提供灵活的计费方式，满足不同用户的需求。' },
-                    { label: '行业意义', content: '中国移动的创新尝试为AI服务的商业化运营提供了新的思路，有助于推动AI产业生态的发展。' }
-                ],
-                summary: '中国移动的"词元套餐"是AI服务商业化的有益探索。降低AI使用门槛将加速AI技术的普及，让更多人受益于AI带来的便利。',
-                related: [9, 8, 11, 5]
-            },
-            11: {
-                title: '白宫拟发布AI行政令',
-                category: 'AI科技',
-                source: '彭博社',
-                details: [
-                    { label: '核心内容', content: '授权情报机构和政府机构在先进模型发布前进行审查，加强AI安全监管，防范潜在风险。' },
-                    { label: '重要动作', content: '涉及OpenAI、Anthropic等公司，特朗普最快5月21日签署，显示美国政府对AI安全的高度重视。' },
-                    { label: '监管重点', content: '关注AI模型的安全性、公正性和透明度，要求企业采取措施防止AI滥用。' },
-                    { label: '国际影响', content: '美国的AI监管举措将对全球产生示范效应，推动各国加强AI治理合作。' }
-                ],
-                summary: '白宫的AI行政令反映了各国对AI安全的担忧。在推动AI发展的同时，建立健全监管体系是确保AI技术健康发展的必要条件。',
-                related: [8, 3, 9, 12]
-            },
-            12: {
-                title: '美军加速AI军事化进程',
-                category: '军事安全',
-                source: '解放军报',
-                details: [
-                    { label: '核心内容', content: '五角大楼与SpaceX、OpenAI、谷歌等7家AI巨头达成540亿美元协议，推动AI技术在军事领域的应用。' },
-                    { label: '重要动作', content: '将顶尖AI技术接入军事机密网络（IL-6/IL-7），直接参与作战决策，提升美军智能化作战能力。' },
-                    { label: '紧张态势', content: '标志美军向"AI主导"作战力量转型，引发全球军备竞赛担忧，国际社会呼吁制定AI军事应用规范。' },
-                    { label: '技术影响', content: 'AI技术在军事领域的广泛应用将深刻改变未来战争形态，对国家安全提出新的挑战。' }
-                ],
-                summary: '美军加速AI军事化值得高度警惕。AI技术的军事应用可能打破现有的战略平衡，国际社会需要共同制定规则，防止AI武器化带来的风险。',
-                related: [1, 2, 8, 11]
-            },
-            13: {
-                title: '我国新型装备亮相，国防科技再获突破',
-                category: '军事安全',
-                source: '央视新闻',
-                details: [
-                    { label: '重要成果', content: '多款新型装备在国防科技展上亮相，展现我国国防自主创新能力，标志着我国国防科技水平迈上新台阶。' },
-                    { label: '核心计划', content: '加快国防科技创新体系建设，推动军民融合深度发展，提升国家整体安全保障能力。' },
-                    { label: '技术亮点', content: '在人工智能、无人系统、先进材料等领域取得重要突破，部分技术达到国际先进水平。' },
-                    { label: '战略意义', content: '强大的国防科技能力是维护国家主权、安全和发展利益的坚实保障，也是大国地位的重要体现。' }
-                ],
-                summary: '我国国防科技的进步是综合国力提升的重要体现。坚持自主创新，建设强大国防，是实现中华民族伟大复兴的必然要求。',
-                related: [1, 9, 12, 7]
-            },
-            14: {
-                title: '中欧联合"微笑"卫星成功发射',
-                category: '人文社会',
-                source: '光明日报',
-                details: [
-                    { label: '核心内容', content: '探测太阳风与地球磁层相互作用，深化太空科学合作，为空间天气预测提供关键数据支持。' },
-                    { label: '重要成果', content: '中欧航天合作再结硕果，卫星成功进入预定轨道，开始科学探测任务。' },
-                    { label: '科学目标', content: '研究太阳活动对地球空间环境的影响，提高空间天气预警能力，保障卫星和航天员安全。' },
-                    { label: '合作意义', content: '中欧在航天领域的合作展示了国际科技合作的重要价值，为人类探索宇宙作出共同贡献。' }
-                ],
-                summary: '中欧航天合作是国际科技交流的典范。通过共同努力探索宇宙奥秘，人类能够更好地认识和保护我们的地球家园。',
-                related: [6, 15, 9, 3]
-            },
-            15: {
-                title: '小米发布新车型YU7 GT',
-                category: '人文社会',
-                source: '汽车之家',
-                details: [
-                    { label: '核心内容', content: '雷军表示该车定位为"时代精英"打造，定价"会有点小贵"，聚焦高端智能汽车市场。' },
-                    { label: '核心计划', content: '聚焦高端智能汽车市场，计划2027年实现L4级自动驾驶量产，推动智能出行发展。' },
-                    { label: '产品特点', content: '采用最新智能驾驶技术，配备先进的智能座舱系统，提供卓越的驾乘体验。' },
-                    { label: '行业影响', content: '小米的进入将进一步推动智能汽车市场的竞争，加速行业创新和技术进步。' }
-                ],
-                summary: '小米进军高端智能汽车市场标志着科技企业跨界融合的趋势。随着智能化、电动化的发展，汽车产业正在经历深刻变革。',
-                related: [9, 6, 14, 7]
-            }
+        var newsData = {
+            // {{NEWS_DATA_PLACEHOLDER}}
+            1: {title: '新闻示例', source: '来源', url: '#', cat: 'politics'}
         };
-
+        
         function getNewsId() {
-            const params = new URLSearchParams(window.location.search);
-            const id = params.get('news') || params.get('n');
+            var params = new URLSearchParams(window.location.search);
+            var id = params.get('n') || params.get('news');
             return id ? parseInt(id) : 1;
         }
-
-        function renderNews(newsId) {
-            const news = newsData[newsId];
+        
+        function renderNews(id) {
+            var news = newsData[id];
             if (!news) {
-                document.getElementById('news-title').textContent = '新闻未找到';
+                document.getElementById('title').textContent = '新闻未找到';
                 return;
             }
-
-            document.getElementById('news-title').textContent = news.title;
-            document.getElementById('category-tag').textContent = news.category;
-            document.getElementById('news-source').textContent = '📰 ' + news.source;
-            document.getElementById('news-summary').textContent = news.summary;
-
-            const detailsContainer = document.getElementById('news-details');
-            detailsContainer.innerHTML = '';
-            news.details.forEach(item => {
-                const detailItem = document.createElement('div');
-                detailItem.className = 'detail-item';
-                detailItem.innerHTML = `<span class="detail-label">${item.label}</span><span class="detail-content">${item.content}</span>`;
-                detailsContainer.appendChild(detailItem);
-            });
-
-            const relatedContainer = document.getElementById('related-news');
-            relatedContainer.innerHTML = '';
-            news.related.forEach(relatedId => {
-                const relatedNews = newsData[relatedId];
-                if (relatedNews) {
-                    const li = document.createElement('li');
-                    li.className = 'related-item';
-                    li.onclick = () => window.location.href = `news-detail.html?news=${relatedId}`;
-                    li.innerHTML = `<span class="related-icon">📌</span><span class="title">${relatedNews.title}</span>`;
-                    relatedContainer.appendChild(li);
+            document.getElementById('title').textContent = news.title;
+            document.getElementById('meta').innerHTML = 
+                '<span>📰 ' + news.source + '</span>' +
+                '<span>📂 ' + getCategoryName(news.cat) + '</span>';
+            document.getElementById('content').innerHTML = 
+                '<p><a href="' + news.url + '" target="_blank"> 查看原文链接</a></p>';
+            document.getElementById('impact').textContent = 
+                getImpactText(news.cat);
+            
+            var related = [];
+            for (var key in newsData) {
+                if (parseInt(key) !== id && newsData[key].cat === news.cat) {
+                    related.push(key);
                 }
-            });
+            }
+            related = related.slice(0, 4);
+            var html = '';
+            for (var i = 0; i < related.length; i++) {
+                var k = related[i];
+                html += '<div class="rel-item" onclick="window.location.href=\'news-detail.html?n=' + k + '\'">' + newsData[k].title + '</div>';
+            }
+            document.getElementById('related').innerHTML = html || '<p style="color:#95a5a6;">暂无相关新闻</p>';
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const newsId = getNewsId();
-            renderNews(newsId);
-        });
+        
+        function getCategoryName(cat) {
+            var map = {
+                politics: '国际政治',
+                economy: '财经经济', 
+                tech: 'AI科技',
+                military: '军事安全',
+                society: '人文社会'
+            };
+            return map[cat] || '其他';
+        }
+        
+        function getImpactText(cat) {
+            var map = {
+                politics: '国际政治新闻反映当前世界格局的演变趋势，关注大国关系调整和多边外交进展，有助于把握全球政治经济走向。',
+                economy: '财经动态展现全球经济运行态势，把握市场脉搏和政策走向，对于理解宏观经济和投资决策具有参考价值。',
+                tech: '科技领域日新月异，AI、大数据、云计算等技术快速迭代，持续推动产业升级和社会变革，是未来发展的核心驱动力。',
+                military: '国防军事新闻反映国家安全形势和全球军事格局变化，关注国防建设和军事技术发展，增强忧患意识和国防观念。',
+                society: '社会民生新闻贴近日常生活，反映群众关切和社会发展进步，体现人文关怀和时代温度。'
+            };
+            return map[cat] || '该新闻反映了当前相关领域的最新动态，值得持续关注和深入思考。';
+        }
+        
+        renderNews(getNewsId());
     </script>
 </body>
 </html>
