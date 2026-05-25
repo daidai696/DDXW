@@ -3,50 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新闻详情</title>
+    <title>新闻详情 - 每日新闻速递</title>
     <style>
-        body { font-family: sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.8;
+        }
         .container { max-width: 800px; margin: 0 auto; }
-        .card { background: white; border-radius: 20px; padding: 30px; }
-        .title { font-size: 26px; font-weight: 700; color: #2c3e50; }
-        .content { color: #5a6672; line-height: 1.8; margin-top: 20px; }
-        .impact { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; padding: 20px; color: white; margin-top: 20px; }
-        .related { margin-top: 30px; padding-top: 30px; border-top: 1px solid #eee; }
-        .rel-item { padding: 12px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+            font-size: 15px;
+        }
+        .back-link:hover { color: #764ba2; }
+        .title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .meta span {
+            background: #f5f7fa;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 14px;
+            color: #5a6672;
+        }
+        .content {
+            color: #5a6672;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+        .content a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        .content a:hover { text-decoration: underline; }
+        .impact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 22px;
+            color: white;
+            margin-top: 20px;
+        }
+        .impact h4 {
+            font-size: 17px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .impact p {
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+        .related {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+        }
+        .related h4 {
+            color: #2c3e50;
+            margin-bottom: 18px;
+            font-size: 17px;
+        }
+        .rel-item {
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #2c3e50;
+        }
+        .rel-item:last-child { border-bottom: none; }
+        .rel-item:hover {
+            color: #667eea;
+            padding-left: 8px;
+        }
+        .footer {
+            background: rgba(255,255,255,0.95);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .footer p { color: #7f8c8d; font-size: 14px; }
+        @media (max-width: 600px) {
+            .title { font-size: 20px; }
+            .card { padding: 20px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <button onclick="window.location.href='daily-news.html'">← 返回列表</button>
         <div class="card">
-            <div id="title">加载中...</div>
-            <div id="content"></div>
+            <a href="daily-news.html" class="back-link">
+                <span>←</span>
+                <span>返回新闻列表</span>
+            </a>
+            <div class="title" id="title">正在加载...</div>
+            <div class="meta" id="meta"></div>
+            <div class="content" id="content"></div>
             <div class="impact">
                 <h4>💡 新闻启示</h4>
                 <p id="impact"></p>
             </div>
             <div class="related">
-                <h4> 相关新闻</h4>
+                <h4>📌 相关新闻</h4>
                 <div id="related"></div>
             </div>
+        </div>
+        <div class="footer">
+            <p>🌐 每日早10点自动更新新闻 | 祝您阅读愉快</p>
         </div>
     </div>
     <script>
         var newsData = {
-            1: {title: '今日主角 | “敬二舅”刷屏：平凡之光，大有力量', source: '新华网', url: 'http://www.news.cn/comments/20220728/b8859a78ad1743aeba8fdeadff3651bb/c.html', cat: 'politics'},
-            2: {title: '如何理解文化自信的这一根本性意义？', source: '新华网', url: 'http://www.xinhuanet.com/comments/20220604/1f747dd82f284b56849e5d5302d84f22/c.html', cat: 'politics'},
-            3: {title: '新时代中国发展进步的成功之道', source: '新华网', url: 'http://www.news.cn/comments/20220507/633c2f34e0744bddac65f88387f168f8/c.html', cat: 'politics'},
-            4: {title: '开局起步“十五五”系列主题新闻发布会', source: '新华网', url: 'https://www.news.cn/zt/swwxlztfbh/index.html', cat: 'politics'},
-            5: {title: '“清清黄河”行进式报道', source: '新华网', url: 'https://www.news.cn/specials.html', cat: 'politics'},
-            6: {title: '爱尔眼科大额补税', source: '新浪财经', url: 'https://finance.sina.com.cn/zt_d/subject-1779339744', cat: 'economy'},
-            7: {title: '证监会严肃查处老虎富途长桥', source: '新浪财经', url: 'https://finance.sina.com.cn/zt_d/zjhyclhftcqffkjzyaj', cat: 'economy'},
-            8: {title: '新浪财经APP', source: '新浪财经', url: 'javascript:;', cat: 'economy'},
-            9: {title: '金麒麟研报', source: '新浪财经', url: 'https://finance.sina.com.cn/stock/reportch/jinqilin.shtml', cat: 'economy'},
-            10: {title: 'RSS订阅', source: 'IT 之家', url: 'https://www.ithome.com//www.ithome.com/rss/', cat: 'tech'},
-            11: {title: '收藏IT之家', source: 'IT 之家', url: '#', cat: 'tech'},
-            12: {title: 'App客户端', source: 'IT 之家', url: 'https://www.ithome.com//m.ruanmei.com/', cat: 'tech'},
-            13: {title: '要知App', source: 'IT 之家', url: 'https://www.ithome.com//yaozhi.ruanmei.com/', cat: 'tech'},
-            14: {title: 'iPhone', source: 'IT 之家', url: 'https://www.ithome.com//iphone.ithome.com/', cat: 'tech'}
+            // {{NEWS_DATA_PLACEHOLDER}}
+            1: {title: '新闻示例', source: '来源', url: '#', cat: 'politics'}
         };
         
         function getNewsId() {
@@ -62,8 +161,13 @@
                 return;
             }
             document.getElementById('title').textContent = news.title;
-            document.getElementById('content').innerHTML = '<p>来源：' + news.source + '</p><p><a href="' + news.url + '" target="_blank" style="color: #667eea;">查看原文</a></p>';
-            document.getElementById('impact').textContent = '该新闻反映了当前' + news.cat + '领域的最新动态，值得持续关注。';
+            document.getElementById('meta').innerHTML = 
+                '<span>📰 ' + news.source + '</span>' +
+                '<span>📂 ' + getCategoryName(news.cat) + '</span>';
+            document.getElementById('content').innerHTML = 
+                '<p><a href="' + news.url + '" target="_blank"> 查看原文链接</a></p>';
+            document.getElementById('impact').textContent = 
+                getImpactText(news.cat);
             
             var related = [];
             for (var key in newsData) {
@@ -71,13 +175,35 @@
                     related.push(key);
                 }
             }
-            related = related.slice(0, 3);
+            related = related.slice(0, 4);
             var html = '';
             for (var i = 0; i < related.length; i++) {
                 var k = related[i];
-                html += '<div class="rel-item" onclick="window.location.href=\'news-detail.html?n=\' + k + \'\'">' + newsData[k].title + '</div>';
+                html += '<div class="rel-item" onclick="window.location.href=\'news-detail.html?n=' + k + '\'">' + newsData[k].title + '</div>';
             }
-            document.getElementById('related').innerHTML = html || '<p style="color: #95a5a6;">暂无相关新闻</p>';
+            document.getElementById('related').innerHTML = html || '<p style="color:#95a5a6;">暂无相关新闻</p>';
+        }
+        
+        function getCategoryName(cat) {
+            var map = {
+                politics: '国际政治',
+                economy: '财经经济', 
+                tech: 'AI科技',
+                military: '军事安全',
+                society: '人文社会'
+            };
+            return map[cat] || '其他';
+        }
+        
+        function getImpactText(cat) {
+            var map = {
+                politics: '国际政治新闻反映当前世界格局的演变趋势，关注大国关系调整和多边外交进展，有助于把握全球政治经济走向。',
+                economy: '财经动态展现全球经济运行态势，把握市场脉搏和政策走向，对于理解宏观经济和投资决策具有参考价值。',
+                tech: '科技领域日新月异，AI、大数据、云计算等技术快速迭代，持续推动产业升级和社会变革，是未来发展的核心驱动力。',
+                military: '国防军事新闻反映国家安全形势和全球军事格局变化，关注国防建设和军事技术发展，增强忧患意识和国防观念。',
+                society: '社会民生新闻贴近日常生活，反映群众关切和社会发展进步，体现人文关怀和时代温度。'
+            };
+            return map[cat] || '该新闻反映了当前相关领域的最新动态，值得持续关注和深入思考。';
         }
         
         renderNews(getNewsId());
