@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -27,43 +26,45 @@
                 <p id="impact"></p>
             </div>
             <div class="related">
-                <h4>📌 相关新闻</h4>
+                <h4> 相关新闻</h4>
                 <div id="related"></div>
             </div>
         </div>
     </div>
     <script>
         var newsData = {
-            1: {title: '中俄元首会谈：续签睦邻友好合作条约', content: '国家主席习近平与俄罗斯总统普京在北京举行会谈，一致同意《中俄睦邻友好合作条约》继续延期。双方签署发表联合声明，见证签署经贸、教育、科技等领域20项合作文件。', impact: '宏观：中俄战略协作伙伴关系持续深化；微观：双边合作迎来新机遇', cat: 'politics'},
-            2: {title: '美伊谈判进入最后阶段', content: '美国总统特朗普表示，与伊朗的谈判已进入最后阶段。双方代表近日在维也纳举行多轮密集磋商。', impact: '宏观：中东地缘政治格局或将重塑；微观：国际能源市场有望稳定', cat: 'politics'},
-            3: {title: '欧盟推出新数字战略', content: '欧盟委员会发布《数字未来法案》，提出更严格的AI风险分类和合规要求。', impact: '宏观：全球AI监管框架加速形成；微观：科技企业面临合规挑战', cat: 'politics'},
-            4: {title: '美联储会议纪要放鹰', content: '多数决策者认为若通胀持续高于2%需政策收紧，多位官员支持未来加息。', impact: '宏观：全球货币政策进入观望期；微观：投资者需关注利率风险', cat: 'economy'},
-            5: {title: '英伟达Q1财报超预期', content: '营收同比大增85%至816亿美元，净利润达583亿美元，毛利率创历史新高。', impact: '宏观：AI芯片市场需求强劲；微观：科技股投资者情绪提振', cat: 'economy'},
-            6: {title: 'SpaceX提交IPO申请', content: '目标估值指向1.8万亿美元，计划2028年部署轨道算力卫星。', impact: '宏观：太空经济迎来资本热潮；微观：私人航天领域竞争加剧', cat: 'economy'},
-            7: {title: '中国财政数据亮眼', content: '1-4月全国税收收入6.81万亿元，同比增长3.9%。', impact: '宏观：财政收入稳健；微观：企业经营环境改善', cat: 'economy'},
-            8: {title: 'OpenAI发布GPT-4o升级版', content: '推出GPT-4o Ultra模型，支持128K上下文窗口，图像理解能力提升40%。', impact: '宏观：AI多模态能力达到新高度；微观：开发者可构建更复杂应用', cat: 'tech'},
-            9: {title: '阿里云发布真武M890AI芯片', content: '采用5nm工艺，算力达400TOPS，能效比提升60%。', impact: '宏观：国产AI芯片自主可控取得进展；微观：云计算厂商竞争加剧', cat: 'tech'},
-            10: {title: '中国移动上线词元套餐', content: '推出统一算力量纲，将不同模型词元消耗统一封装为标准积分。', impact: '宏观：AI算力服务商业模式创新；微观：企业AI使用成本透明', cat: 'tech'},
-            11: {title: '白宫拟发布AI行政令', content: '授权情报机构和政府机构在先进模型发布前进行审查。', impact: '宏观：美国AI监管政策收紧；微观：科技巨头面临更严格审查', cat: 'tech'},
-            12: {title: '美军加速AI军事化进程', content: '五角大楼与SpaceX、OpenAI、谷歌等7家AI巨头达成540亿美元协议。', impact: '宏观：全球军事AI竞赛升级；微观：AI伦理和安全问题亟待重视', cat: 'military'},
-            13: {title: '我国新型装备亮相', content: '多款新型装备在国防科技展上亮相，展现我国国防自主创新能力。', impact: '宏观：国防现代化建设取得新进展；微观：军工企业迎来发展机遇', cat: 'military'},
-            14: {title: '中欧联合微笑卫星成功发射', content: '探测太阳风与地球磁层相互作用，深化太空科学合作。', impact: '宏观：国际太空合作持续深化；微观：空间天气研究获得新数据', cat: 'society'},
-            15: {title: '小米发布新车型YU7 GT', content: '雷军表示该车定位为时代精英打造，定价会有点小贵。', impact: '宏观：新能源汽车市场竞争加剧；微观：消费者有更多高端选择', cat: 'society'}
+            1: {title: '今日主角 | “敬二舅”刷屏：平凡之光，大有力量', source: '新华网', url: 'http://www.news.cn/comments/20220728/b8859a78ad1743aeba8fdeadff3651bb/c.html', cat: 'politics'},
+            2: {title: '如何理解文化自信的这一根本性意义？', source: '新华网', url: 'http://www.xinhuanet.com/comments/20220604/1f747dd82f284b56849e5d5302d84f22/c.html', cat: 'politics'},
+            3: {title: '新时代中国发展进步的成功之道', source: '新华网', url: 'http://www.news.cn/comments/20220507/633c2f34e0744bddac65f88387f168f8/c.html', cat: 'politics'},
+            4: {title: '开局起步“十五五”系列主题新闻发布会', source: '新华网', url: 'https://www.news.cn/zt/swwxlztfbh/index.html', cat: 'politics'},
+            5: {title: '“清清黄河”行进式报道', source: '新华网', url: 'https://www.news.cn/specials.html', cat: 'politics'},
+            6: {title: '爱尔眼科大额补税', source: '新浪财经', url: 'https://finance.sina.com.cn/zt_d/subject-1779339744', cat: 'economy'},
+            7: {title: '证监会严肃查处老虎富途长桥', source: '新浪财经', url: 'https://finance.sina.com.cn/zt_d/zjhyclhftcqffkjzyaj', cat: 'economy'},
+            8: {title: '新浪财经APP', source: '新浪财经', url: 'javascript:;', cat: 'economy'},
+            9: {title: '金麒麟研报', source: '新浪财经', url: 'https://finance.sina.com.cn/stock/reportch/jinqilin.shtml', cat: 'economy'},
+            10: {title: 'RSS订阅', source: 'IT 之家', url: 'https://www.ithome.com//www.ithome.com/rss/', cat: 'tech'},
+            11: {title: '收藏IT之家', source: 'IT 之家', url: '#', cat: 'tech'},
+            12: {title: 'App客户端', source: 'IT 之家', url: 'https://www.ithome.com//m.ruanmei.com/', cat: 'tech'},
+            13: {title: '要知App', source: 'IT 之家', url: 'https://www.ithome.com//yaozhi.ruanmei.com/', cat: 'tech'},
+            14: {title: 'iPhone', source: 'IT 之家', url: 'https://www.ithome.com//iphone.ithome.com/', cat: 'tech'}
         };
+        
         function getNewsId() {
             var params = new URLSearchParams(window.location.search);
-            var id = params.get('n');
+            var id = params.get('n') || params.get('news');
             return id ? parseInt(id) : 1;
         }
+        
         function renderNews(id) {
             var news = newsData[id];
             if (!news) {
-                document.getElementById('title').textContent = '新闻不存在';
+                document.getElementById('title').textContent = '新闻未找到';
                 return;
             }
             document.getElementById('title').textContent = news.title;
-            document.getElementById('content').textContent = news.content;
-            document.getElementById('impact').textContent = news.impact;
+            document.getElementById('content').innerHTML = '<p>来源：' + news.source + '</p><p><a href="' + news.url + '" target="_blank" style="color: #667eea;">查看原文</a></p>';
+            document.getElementById('impact').textContent = '该新闻反映了当前' + news.cat + '领域的最新动态，值得持续关注。';
+            
             var related = [];
             for (var key in newsData) {
                 if (parseInt(key) !== id && newsData[key].cat === news.cat) {
@@ -74,10 +75,11 @@
             var html = '';
             for (var i = 0; i < related.length; i++) {
                 var k = related[i];
-                html += '<div class="rel-item" onclick="window.location.href='news-detail.html?n=' + k + ''">' + newsData[k].title + '</div>';
+                html += '<div class="rel-item" onclick="window.location.href=\'news-detail.html?n=\' + k + \'\'">' + newsData[k].title + '</div>';
             }
             document.getElementById('related').innerHTML = html || '<p style="color: #95a5a6;">暂无相关新闻</p>';
         }
+        
         renderNews(getNewsId());
     </script>
 </body>
