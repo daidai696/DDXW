@@ -1,11 +1,126 @@
 #!/usr/bin/env python3
 """
-每日新闻自动生成脚本
+每日新闻自动生成脚本 - 使用爬虫获取真实新闻
 """
 
+import requests
 from datetime import datetime
+from bs4 import BeautifulSoup
+import json
+import re
 
-def generate_daily_news():
+# 新闻源配置
+NEWS_SOURCES = {
+    'politics': [
+        {'name': '新华网', 'url': 'http://www.xinhuanet.com/politics/'},
+        {'name': '人民网', 'url': 'http://politics.people.com.cn/'},
+        {'name': '央视新闻', 'url': 'https://news.cctv.com/politics/'},
+    ],
+    'economy': [
+        {'name': '财新网', 'url': 'https://www.caixin.com/'},
+        {'name': '华尔街见闻', 'url': 'https://wallstreetcn.com/'},
+        {'name': '新浪财经', 'url': 'https://finance.sina.com.cn/'},
+    ],
+    'tech': [
+        {'name': '36 氪', 'url': 'https://36kr.com/'},
+        {'name': '虎嗅', 'url': 'https://www.huxiu.com/'},
+        {'name': 'IT 之家', 'url': 'https://www.ithome.com/'},
+    ],
+    'military': [
+        {'name': '参考消息', 'url': 'http://www.cankaoxiaoxi.com/'},
+        {'name': '环球时报', 'url': 'https://www.huanqiu.com/'},
+    ],
+    'society': [
+        {'name': '澎湃新闻', 'url': 'https://www.thepaper.cn/'},
+        {'name': '新京报', 'url': 'https://www.bjnews.com.cn/'},
+    ]
+}
+
+HEADERS = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+}
+
+def fetch_news_from_source(source):
+    """从指定新闻源爬取新闻"""
+    news_list = []
+    try:
+        response = requests.get(source['url'], headers=HEADERS, timeout=10)
+        response.encoding = 'utf-8'
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # 尝试不同的新闻链接选择器
+        links = soup.find_all('a', href=True)
+        
+        for link in links[:50]:  # 限制处理数量
+            title = link.get_text(strip=True)
+            href = link['href']
+            
+            # 过滤无效链接和标题
+            if not title or len(title) < 5 or len(title) > 100:
+                continue
+            
+            # 过滤非新闻链接
+            if any(keyword in title.lower() for keyword in ['广告', '推广', '专题', '直播']):
+                continue
+            
+            # 处理相对链接
+            if href.startswith('/'):
+                if 'xinhuanet' in source['url']:
+                    href = 'http://www.xinhuanet.com' + href
+                elif 'people' in source['url']:
+                    href = 'http://politics.people.com.cn' + href
+                # ... 其他域名处理
+            
+            news_list.append({
+                'title': title,
+                'source': source['name'],
+                'url': href
+            })
+            
+            if len(news_list) >= 3:  # 每个源最多取 3 条
+                break
+                
+    except Exception as e:
+        print(f"爬取 {source['name']} 失败：{str(e)}")
+    
+    return news_list
+
+def fetch_all_news():
+    """获取所有类别的新闻"""
+    all_news = {}
+    
+    for category, sources in NEWS_SOURCES.items():
+        category_news = []
+        for source in sources:
+            news = fetch_news_from_source(source)
+            category_news.extend(news)
+        
+        # 去重（按标题）
+        seen = set()
+        unique_news = []
+        for news in category_news:
+            if news['title'] not in seen:
+                seen.add(news['title'])
+                unique_news.append(news)
+        
+        all_news[category] = unique_news[:5]  # 每个类别最多 5 条
+    
+    return all_news
+
+def generate_daily_news(all_news=None):
+    if all_news is None:
+        print("🕷️ 正在爬取最新新闻...")
+        all_news = fetch_all_news()
+        print(f"✅ 成功获取新闻：政治{len(all_news.get('politics', []))}条，"
+              f"经济{len(all_news.get('economy', []))}条，"
+              f"科技{len(all_news.get('tech', []))}条，"
+              f"军事{len(all_news.get('military', []))}条，"
+              f"社会{len(all_news.get('society', []))}条")
+    
+    today = datetime.now()
+    date_str = today.strftime("%Y年%m月%d日")
     today = datetime.now()
     date_str = today.strftime("%Y年%m月%d日")
     
