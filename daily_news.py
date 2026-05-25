@@ -136,10 +136,14 @@ def generate_daily_news(all_news=None):
             news_id += 1
     
     # 生成新闻数据 JavaScript
-    news_data_str = ',\n            '.join([
-        f"{idx}: {{title: '{data['title'].replace("'", "\\'")}', source: '{data['source']}', url: '{data['url']}', cat: '{data['cat']}'}}"
-        for idx, data in news_data_js.items()
-    ])
+    news_data_parts = []
+    for idx, data in news_data_js.items():
+        title = data['title'].replace("'", "\\'")
+        source = data['source'].replace("'", "\\'")
+        url = data['url'].replace("'", "\\'")
+        cat = data['cat']
+        news_data_parts.append(f"{idx}: {{title: '{title}', source: '{source}', url: '{url}', cat: '{cat}'}}")
+    news_data_str = ',\n            '.join(news_data_parts)
     
     news_html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
