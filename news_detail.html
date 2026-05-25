@@ -430,7 +430,7 @@
 
         function getNewsId() {
             const params = new URLSearchParams(window.location.search);
-            const id = params.get('news');
+            const id = params.get('news') || params.get('n');
             return id ? parseInt(id) : 1;
         }
 
