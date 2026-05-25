@@ -110,6 +110,8 @@ def get_fallback_news():
     }
 
 def update_html_template(news_data):
+    print("🔍 当前目录文件:", os.listdir('.'))
+    
     date_str = datetime.now().strftime("%Y年%m月%d日")
     
     category_map = {
@@ -152,8 +154,8 @@ def update_html_template(news_data):
         js_parts.append(f"{idx}: {{title: '{data['title']}', source: '{data['source']}', url: '{data['url']}', cat: '{data['cat']}'}}")
     js_news_data = ',\n            '.join(js_parts)
     
-    html_path = os.path.join(os.path.dirname(__file__), 'daily-news.html')
-    detail_path = os.path.join(os.path.dirname(__file__), 'news-detail.html')
+    html_path = 'daily-news.html'
+    detail_path = 'news-detail.html'
     
     with open(html_path, 'r', encoding='utf-8') as f:
         main_html = f.read()
