@@ -129,7 +129,7 @@ def update_html_template(news_data):
     for cat_key, cat_info in category_map.items():
         items = []
         for news in news_data.get(cat_key, []):
-            item_html = f'''<div class="news-item" onclick="window.location.href='news-detail.html?n={news_id}'">
+            item_html = f'''<div class="news-item" onclick="window.location.href='news_detail.html?n={news_id}'">
                 <div class="news-title">{news['title']}</div>
                 <span class="news-source">{news['source']}</span>
                 <p>{news['title'][:40]}...</p>
@@ -154,8 +154,8 @@ def update_html_template(news_data):
         js_parts.append(f"{idx}: {{title: '{data['title']}', source: '{data['source']}', url: '{data['url']}', cat: '{data['cat']}'}}")
     js_news_data = ',\n            '.join(js_parts)
     
-    html_path = 'daily-news.html'
-    detail_path = 'news-detail.html'
+    html_path = 'daily_news.html'
+    detail_path = 'news_detail.html'
     
     with open(html_path, 'r', encoding='utf-8') as f:
         main_html = f.read()
